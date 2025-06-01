@@ -18,7 +18,7 @@ jobs:
 
       - name: Build with g++
         run: |
-          g++ -o lagswitch.exe main.cpp -lws2_32
+          g++ -o lagswitch.exe RAPE-THEM-ALL_USER/main.cpp -lws2_32
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
