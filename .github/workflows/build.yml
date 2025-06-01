@@ -1,0 +1,31 @@
+name: Build Lag Switch
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup MinGW
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: x64
+
+    - name: Build with g++
+      run: |
+        g++ -o lagswitch.exe main.cpp -lws2_32
+        mkdir artifacts
+        copy lagswitch.exe artifacts/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: lagswitch-windows-x64
+        path: artifacts/lagswitch.exe
